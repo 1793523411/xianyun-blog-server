@@ -16,11 +16,36 @@ router.post(
   "/upload",
   multer({ dest: `${UPLOAD_PATH}` }).single("pic"),
   function (req, res, next) {
-    console.log(UPLOAD_PATH)
-    var file = req.body;
+    var file = req.file;
     console.log(file);
-    res.send("111");
+    if (!file || file.length === 0) {
+    } else {
+      var num = parseInt(Math.random() * 100000);
+      let oldname = file.path;
+      let newname = `${file.destination}/${num}-${file.originalname}`;
+      fs.rename(oldname, newname, (err) => {
+        if (err) {
+          let response = {
+            message: "fail",
+            err: err,
+          };
+          res.json("error");
+        }else{
+          console.log(`./tmp/${num}-${file.originalname}`)
+          client.put(`avator/${num}-${file.originalname}`, `./tmp/${num}-${file.originalname}`).then(result => {
+            console.log(result)
+            res.json({
+              url:result.url
+            })
+          })
+        }
+      })
+    }
   }
 );
+
+router.get('/test',(req,res,next) =>{
+  res.json('111')
+})
 
 module.exports = router;

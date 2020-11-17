@@ -52,8 +52,33 @@ router.post("/register/smtp", (req, res) => {
       res.json(result.data);
     });
 });
+router.post("/register/sms", (req, res) => {
+  console.log(req.body);
+  const data = req.body;
+  axios
+    .post(
+      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/sms",
+      data
+    )
+    .then((result) => {
+      console.log(result);
+      res.json(result.data);
+    });
+});
 
 router.post("/register/smtp/check", (req, res) => {
+  console.log(req.body);
+  const data = req.body;
+  axios
+    .post(
+      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/sms/check",
+      data
+    )
+    .then((result) => {
+      res.json(result.data);
+    });
+});
+router.post("/register/sms/check", (req, res) => {
   console.log(req.body);
   const data = req.body;
   axios
