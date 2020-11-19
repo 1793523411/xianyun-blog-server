@@ -48,7 +48,7 @@ router.post("/register/smtp", (req, res) => {
       data
     )
     .then((result) => {
-      console.log(result);
+      console.log(result.data);
       res.json(result.data);
     });
 });
@@ -61,7 +61,7 @@ router.post("/register/sms", (req, res) => {
       data
     )
     .then((result) => {
-      console.log(result);
+      console.log(result.data);
       res.json(result.data);
     });
 });
@@ -71,7 +71,7 @@ router.post("/register/smtp/check", (req, res) => {
   const data = req.body;
   axios
     .post(
-      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/sms/check",
+      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/smtp/check",
       data
     )
     .then((result) => {
@@ -83,7 +83,7 @@ router.post("/register/sms/check", (req, res) => {
   const data = req.body;
   axios
     .post(
-      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/smtp/check",
+      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/sms/check",
       data
     )
     .then((result) => {
