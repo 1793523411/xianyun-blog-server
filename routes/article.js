@@ -53,13 +53,11 @@ router.post("/del", (req, res) => {
 });
 
 router.post("/getById", (req, res) => {
+  console.log(req.body);
   axios
-    .post(
-    //   "http://openapi.xianyun.site/xianyun-blog/blog/list",
-      "http://openapi.xianyun.site/xianyun-blog/blog/view/user1882632/article/details/随机编号",
-      {
-        id: req.body.id,
-      },
+    .get(
+      //   "http://openapi.xianyun.site/xianyun-blog/blog/list",
+      `http://openapi.xianyun.site/xianyun-blog/blog/${req.body.url}/article/details/${req.body.uniqueId}`,
       {
         headers: {
           Token: req.headers.token,
@@ -73,5 +71,35 @@ router.post("/getById", (req, res) => {
     });
 });
 
+router.post("/update", (req, res) => {
+  console.log(req.body);
+  axios
+    .post("http://openapi.xianyun.site/xianyun-blog/blog/update", req.body, {
+      headers: {
+        Token: req.headers.token,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((result) => {
+      console.log(result.data);
+      res.json(result.data);
+    });
+});
+
+router.post(
+  "/filter",
+  (req, res) => {
+    console.log(req.body)
+    axios.post("http://openapi.xianyun.site/xianyun-blog/blog/list", req.body, {
+      headers: {
+        Token: req.headers.token,
+        "Content-Type": "application/json",
+      },
+    }).then(result => {
+      // console.log(result.data)
+      res.json(result.data)
+    });
+  }
+);
 
 module.exports = router;
