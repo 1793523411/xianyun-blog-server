@@ -96,7 +96,7 @@ router.post(
         "Content-Type": "application/json",
       },
     }).then(result => {
-      // console.log(result.data)
+      console.log(result.data)
       res.json(result.data)
     });
   }

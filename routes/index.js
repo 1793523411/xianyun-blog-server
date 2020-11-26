@@ -5,7 +5,10 @@ var axios = require("axios");
 /* GET home page. */
 router.post("/login", function (req, res, next) {
   // res.render('index', { title: 'Express' });
-  console.log(req.body);
+  // console.log(req.body);
+  console.log(req.body.ip);
+  console.log("用户ip"+req.ip);
+  // console.log(req.headers["user-agent"]);
   let data = {
     userName: req.body.userName,
     email: req.body.email,
@@ -17,10 +20,16 @@ router.post("/login", function (req, res, next) {
   axios
     .post(
       "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/login/check",
-      data
+      data,
+      {
+        headers: {
+          "User-Agent": req.headers["user-agent"],
+          "ip":req.body.ip
+        },
+      }
     )
     .then((result) => {
-      console.log(result);
+      console.log(result.data);
       res.json(result.data);
     });
 });

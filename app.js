@@ -23,7 +23,7 @@ var app = express();
 
 app.all('*', function (req, res, next) {
   // res.header('Access-Control-Allow-Origin', 'http://ice-blog-server.ygjie.icu');
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3333');
+  res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:3333');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Token, x-requested-with');
   res.header('Access-Control-Allow-Methods', '*');
   res.header('Content-Type', 'application/json;charset=utf-8');
