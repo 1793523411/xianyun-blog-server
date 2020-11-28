@@ -5,7 +5,7 @@ var axios = require("axios");
 /* GET home page. */
 router.post("/login", function (req, res, next) {
   // res.render('index', { title: 'Express' });
-  // console.log(req.body);
+  console.log(req.body);
   console.log(req.body.ip);
   console.log("用户ip"+req.ip);
   // console.log(req.headers["user-agent"]);
@@ -13,6 +13,7 @@ router.post("/login", function (req, res, next) {
     userName: req.body.userName,
     email: req.body.email,
     mobile: req.body.mobile,
+    code:req.body.code,
     // eslint-disable-next-line @iceworks/best-practices/no-secret-info
     password: req.body.password,
     loginType: req.body.loginType,
