@@ -30,6 +30,7 @@ router.post("/login", function (req, res, next) {
       }
     )
     .then((result) => {
+      console.log("login-result")
       console.log(result.data);
       res.json(result.data);
     });
@@ -102,7 +103,7 @@ router.post("/register/sms/check", (req, res) => {
 });
 
 router.get("/user/info", (req, res) => {
-  console.log(req.headers.token);
+  // console.log(req.headers.token);
   axios
     .post(
       "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/info",

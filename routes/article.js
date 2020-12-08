@@ -21,7 +21,12 @@ router.get("/getList/all", (req, res) => {
   axios
     .post(
       "http://openapi.xianyun.site/xianyun-blog/blog/list",
-      {},
+      {
+        queryParams: {
+          pageNum: 1,
+          pageSize: 2,
+        },
+      },
       {
         headers: {
           Token: req.headers.token,
@@ -86,20 +91,44 @@ router.post("/update", (req, res) => {
     });
 });
 
-router.post(
-  "/filter",
-  (req, res) => {
-    console.log(req.body)
-    axios.post("http://openapi.xianyun.site/xianyun-blog/blog/list", req.body, {
+router.post("/filter", (req, res) => {
+  console.log(req.body);
+  axios
+    .post("http://openapi.xianyun.site/xianyun-blog/blog/list", req.body, {
       headers: {
         Token: req.headers.token,
         "Content-Type": "application/json",
       },
-    }).then(result => {
-      console.log(result.data)
-      res.json(result.data)
+    })
+    .then((result) => {
+      console.log(result.data);
+      res.json(result.data);
     });
-  }
-);
+});
+
+router.post('/page', (req, res) => {
+  console.log(req.body)
+  axios.post("http://openapi.xianyun.site/xianyun-blog/blog/list?pageNum=" + req.body.pageNum + "&&pageSize=" + req.body.pageSize, req.body, {
+    headers: {
+      Token: req.headers.token,
+      "Content-Type": "application/json",
+    },
+  }).then((result) => {
+    console.log(result.data)
+    res.json(result.data)
+  })
+})
+
+router.get('/getallTag', (req, res) => {
+  axios.get(' http://openapi.xianyun.site/xianyun-blog/blog/view/listTagsAndClass', {
+    headers: {
+      Token: req.headers.token,
+      "Content-Type": "application/json",
+    },
+  }).then(result => {
+    console.log(result.data)
+    res.json(result.data)
+  })
+})
 
 module.exports = router;
