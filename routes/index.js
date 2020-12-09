@@ -7,25 +7,25 @@ router.post("/login", function (req, res, next) {
   // res.render('index', { title: 'Express' });
   console.log(req.body);
   console.log(req.body.ip);
-  console.log("用户ip"+req.ip);
+  console.log("用户ip" + req.ip);
   // console.log(req.headers["user-agent"]);
   let data = {
     userName: req.body.userName,
     email: req.body.email,
     mobile: req.body.mobile,
-    code:req.body.code,
+    code: req.body.code,
     // eslint-disable-next-line @iceworks/best-practices/no-secret-info
     password: req.body.password,
-    loginType: req.body.loginType,
+    extendType: req.body.loginType,
   };
   axios
     .post(
-      "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/login/check",
+      `http://openapi.xianyun.site/xianyun-consumer/open/oauth/check/login?extendType=${req.body.extendType}&extendKey=${req.body.extendKey}&credentials=${req.body.credentials}`,
       data,
       {
         headers: {
           "User-Agent": req.headers["user-agent"],
-          "ip":req.body.ip
+          "X-Real-IP": req.body.ip
         },
       }
     )
