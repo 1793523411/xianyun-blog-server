@@ -5,9 +5,9 @@ var axios = require("axios");
 /* GET home page. */
 router.post("/login", function (req, res, next) {
   // res.render('index', { title: 'Express' });
-  console.log(req.body);
-  console.log(req.body.ip);
-  console.log("用户ip" + req.ip);
+  console.log(req);
+  // console.log(req.body.ip);
+  // console.log("用户ip" + req.ip);
   // console.log(req.headers["user-agent"]);
   let data = {
     userName: req.body.userName,
@@ -111,7 +111,8 @@ router.get("/user/info", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
-          "Content-Type": "application/json",
+          Cookie:"JSESSIONID=E91556F6E8F37C8F388512C6CD54BE0E"
+          // "Content-Type": "application/json",
         },
       }
     )

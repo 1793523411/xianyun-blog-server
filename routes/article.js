@@ -30,6 +30,7 @@ router.get("/getList/all", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
+          Cookie:"JSESSIONID=E91556F6E8F37C8F388512C6CD54BE0E",
           "Content-Type": "application/json",
         },
       }
@@ -124,6 +125,7 @@ router.get('/getallTag', (req, res) => {
     headers: {
       Token: req.headers.token,
       "Content-Type": "application/json",
+      Cookie:"JSESSIONID=E91556F6E8F37C8F388512C6CD54BE0E",
     },
   }).then(result => {
     console.log(result.data)
