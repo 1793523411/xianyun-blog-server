@@ -5,7 +5,7 @@ var axios = require("axios");
 /* GET home page. */
 router.post("/login", function (req, res, next) {
   // res.render('index', { title: 'Express' });
-  console.log(req);
+  // console.log(req);
   // console.log(req.body.ip);
   // console.log("用户ip" + req.ip);
   // console.log(req.headers["user-agent"]);
@@ -31,7 +31,10 @@ router.post("/login", function (req, res, next) {
     )
     .then((result) => {
       console.log("login-result")
-      console.log(result.data);
+      // console.log(result.headers["set-cookie"][0].split(";")[0].split("="));
+      const cookie = result.headers["set-cookie"][0].split(";")[0].split("=")
+      result.data[cookie[0]] = cookie[1]
+      // console.log(result.data)
       res.json(result.data);
     });
 });
@@ -103,7 +106,7 @@ router.post("/register/sms/check", (req, res) => {
 });
 
 router.get("/user/info", (req, res) => {
-  // console.log(req.headers.token);
+  console.log(req.headers.jsessionid);
   axios
     .post(
       "http://openapi.xianyun.site/xianyun-consumer/api/consumer/user/info",
@@ -111,8 +114,7 @@ router.get("/user/info", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
-          Cookie:"JSESSIONID=E91556F6E8F37C8F388512C6CD54BE0E"
-          // "Content-Type": "application/json",
+          Cookie: "JSESSIONID=" + req.headers.jsessionid
         },
       }
     )
@@ -131,6 +133,7 @@ router.post("/user/info/update", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
+          Cookie: "JSESSIONID=" + req.headers.jsessionid,
           "Content-Type": "application/json",
         },
       }

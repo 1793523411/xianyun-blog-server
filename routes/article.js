@@ -8,6 +8,7 @@ router.post("/add", (req, res) => {
     .post("http://openapi.xianyun.site/xianyun-blog/blog/add", req.body, {
       headers: {
         Token: req.headers.token,
+        Cookie: "JSESSIONID=" + req.headers.jsessionid,
         "Content-Type": "application/json",
       },
     })
@@ -30,7 +31,7 @@ router.get("/getList/all", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
-          Cookie:"JSESSIONID=E91556F6E8F37C8F388512C6CD54BE0E",
+          Cookie: "JSESSIONID=" + req.headers.jsessionid,
           "Content-Type": "application/json",
         },
       }
@@ -48,6 +49,7 @@ router.post("/del", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
+          Cookie: "JSESSIONID=" + req.headers.jsessionid,
           "Content-Type": "application/json",
         },
       }
@@ -67,6 +69,7 @@ router.post("/getById", (req, res) => {
       {
         headers: {
           Token: req.headers.token,
+          Cookie: "JSESSIONID=" + req.headers.jsessionid,
           "Content-Type": "application/json",
         },
       }
@@ -83,6 +86,7 @@ router.post("/update", (req, res) => {
     .post("http://openapi.xianyun.site/xianyun-blog/blog/update", req.body, {
       headers: {
         Token: req.headers.token,
+        Cookie: "JSESSIONID=" + req.headers.jsessionid,
         "Content-Type": "application/json",
       },
     })
@@ -98,6 +102,7 @@ router.post("/filter", (req, res) => {
     .post("http://openapi.xianyun.site/xianyun-blog/blog/list", req.body, {
       headers: {
         Token: req.headers.token,
+        Cookie: "JSESSIONID=" + req.headers.jsessionid,
         "Content-Type": "application/json",
       },
     })
@@ -112,6 +117,7 @@ router.post('/page', (req, res) => {
   axios.post("http://openapi.xianyun.site/xianyun-blog/blog/list?pageNum=" + req.body.pageNum + "&&pageSize=" + req.body.pageSize, req.body, {
     headers: {
       Token: req.headers.token,
+      Cookie: "JSESSIONID=" + req.headers.jsessionid,
       "Content-Type": "application/json",
     },
   }).then((result) => {
@@ -124,8 +130,8 @@ router.get('/getallTag', (req, res) => {
   axios.get(' http://openapi.xianyun.site/xianyun-blog/blog/view/listTagsAndClass', {
     headers: {
       Token: req.headers.token,
+      Cookie: "JSESSIONID=" + req.headers.jsessionid,
       "Content-Type": "application/json",
-      Cookie:"JSESSIONID=E91556F6E8F37C8F388512C6CD54BE0E",
     },
   }).then(result => {
     console.log(result.data)
